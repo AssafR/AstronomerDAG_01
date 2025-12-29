@@ -1,37 +1,26 @@
-from __future__ import annotations
-
 from datetime import datetime, timedelta
-
 from airflow import DAG
 from airflow.decorators import task
 
-
-DEFAULT_ARGS = {
-    "owner": "teaching",
-    "retries": 1,
-    "retry_delay": timedelta(seconds=10),
-}
+DEFAULT_ARGS = {"retries": 0}
 
 with DAG(
     dag_id="demo_green_to_red",
     start_date=datetime(2025, 1, 1),
-    schedule=None,           # manual trigger in class
+    schedule=None,
     catchup=False,
     default_args=DEFAULT_ARGS,
-    tags=["teaching", "demo"],
+    tags=["teaching"],
 ) as dag:
 
     @task
-    def extract() -> dict:
-        # lightweight “fake data”
-        return {"rows": 3, "source": "in-memory"}
+    def step_ok() -> dict:
+        return {"value": 42}
 
     @task
-    def transform(payload: dict) -> dict:
-        # succeed in v1
-        payload["rows_transformed"] = payload["rows"] * 10
-        return payload
+    def step_maybe_fail(payload: dict, fail: bool = False) -> None:
+        if fail:
+            raise ValueError("Intentional teaching failure")
+        print(f"All good. payload={payload}")
 
-        # raise ValueError("Intentional teaching failure: transform() crashed")
-
-    extract() >> transform()
+    step_maybe_fail(step_ok(), fail=False)
