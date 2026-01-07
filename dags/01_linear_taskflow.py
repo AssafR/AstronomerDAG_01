@@ -7,6 +7,13 @@ from airflow.models.param import Param
 
 DEFAULT_ARGS = {"retries": 0}
 
+# DAG is a class that represents a DAG (Directed Acyclic Graph)
+# dag_id is the name of the DAG
+# start_date is the date and time the DAG should run
+# schedule is the schedule of the DAG
+# catchup is whether to catch up on missed runs
+# default_args are the default arguments for the DAG
+# tags are the tags for the DAG
 with DAG(
     dag_id="01_linear_taskflow",
     start_date=datetime(2025, 1, 1),
