@@ -1,4 +1,5 @@
 import random
+
 from __future__ import annotations
 
 from datetime import datetime
@@ -34,7 +35,7 @@ with DAG(
 
 
 
-\    @task
+    @task(task_id="maybe_fail")
     def maybe_fail(x: int) -> int:
         if random.random() < 0.5:
             raise ValueError("Random failure (≈50%)")
