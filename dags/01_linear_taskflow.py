@@ -14,6 +14,8 @@ DEFAULT_ARGS = {"retries": 0}
 # catchup is whether to catch up on missed runs
 # default_args are the default arguments for the DAG
 # tags are the tags for the DAG
+# as dag: is the context manager for the DAG
+
 with DAG(
     dag_id="01_linear_taskflow",
     start_date=datetime(2025, 1, 1),
