@@ -47,5 +47,5 @@ with DAG(
         print(f"Final value: {x}")
 
     x = start()
-    y = maybe_fail(x, fail=dag.params["fail"])
+    y = maybe_fail(x)
     end(y)
