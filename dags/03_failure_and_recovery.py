@@ -1,3 +1,4 @@
+import random
 from __future__ import annotations
 
 from datetime import datetime
@@ -31,11 +32,14 @@ with DAG(
     def start() -> int:
         return 10
 
-    @task(task_id="maybe_fail")
-    def maybe_fail(x: int, fail: bool) -> int:
-        if fail:
-            raise ValueError("Intentional teaching failure. Set params.fail=false to succeed.")
+
+
+\    @task
+    def maybe_fail(x: int) -> int:
+        if random.random() < 0.5:
+            raise ValueError("Random failure (≈50%)")
         return x * 2
+
 
     @task(task_id="end")
     def end(x: int) -> None:
