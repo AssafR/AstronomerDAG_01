@@ -29,6 +29,9 @@ with DAG(
 
     @task(task_id="left_branch")
     def left_branch(x: int) -> int:
+        # Wait 10 seconds
+        import time
+        time.sleep(10)
         return x + 1
 
     @task(task_id="right_branch")
