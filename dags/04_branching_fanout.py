@@ -31,7 +31,7 @@ with DAG(
     def left_branch(x: int) -> int:
         # Wait 10 seconds
         import time
-        time.sleep(10)
+        time.sleep(30)
         return x + 1
 
     @task(task_id="right_branch")
