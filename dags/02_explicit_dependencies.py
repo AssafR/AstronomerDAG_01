@@ -5,7 +5,7 @@ from airflow import DAG
 from airflow.decorators import task
 from airflow.models.param import Param
 
-DEFAULT_ARGS = {"retries": 0}
+DEFAULT_ARGS = {"retries": 1}
 
 with DAG(
     dag_id="02_explicit_dependencies",
